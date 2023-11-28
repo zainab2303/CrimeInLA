@@ -1,4 +1,26 @@
 # Data
+The data source that we draw on for the project is: https://catalog.data.gov/dataset/crime-data-from-2020-to-present , https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8 
+The data is collected by the Los Angeles Police Department (LAPD), via transcribing the original crime reports that are typed on paper. 
+
+Format of the data: CSV file
+
+Frequency of updates: The dataset is refreshed and updated weekly.
+
+Dimensions of the data (as downloaded on 27 November, 2023): (843515, 28)
+
+Columns of the dataset (with brackets containing our interpretation of the variable): DR_NO, Date Rptd [Date Reported], DATE OCC [Date occurred], TIME OCC [Time occurred], AREA, AREA NAME, Rpt Dist No [Reported District number], Oart 1-2, Crm Cd [Crime committed], Crm Cd Desc [Crime committed description], Mocodes, Vict Age [Victime Age], Vict Sex [Victim Sex], Vict Descent [Victime Descent], Premis Cd [Premise Code], Premis Desc [Premise description], Weapon Used Cd [Weapon used code], Weapon Desc [Weapon description], Status, Status Desc, Crm Cd 1, Crm Cd 2, Crm Cd 3, Crm Cd 4, LOCATION, Cross Street, LAT [latitude], LON [longitude]
+
+Each row represents one crime occurrence and the details of the crime and the victim.
+
+Known issues within the dataset: Since it consists of records that were typed on paper, it may have inaccuracies by humans. Additionally, the address fields are only provided to the nearest hundred block to maintain privacy. Location fields are missing in some cases, and have been replaced by (0°, 0°).
+
+Discovered issues within the dataset:
+•	Time stamp in date columns are meaningless, since there is a time of occurrence column separately, and all the times in the date column are the beginning of the day.
+•	X is present in the victim description columns like sex and descent. We will consider these to be instances where the victim would have preferred to be anonymous. 
+•	There exist rows where though the sex and descent columns are meaningful (not X), the age column contains a 0 (which might seem impossible). 
+
+
+We plan to import the data by downloading the CSV data file onto our local computer, and then working with it in RStudio by reading this file using read.csv. After we write the code for our project including graphs etc., we will use GitHub to collaborate with each other and contribute to our project.
 
 ## Description
 
