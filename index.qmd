@@ -1,6 +1,32 @@
-# Introduction
-We are interested in finding out who the susceptible victims for a crimes are. We have picked LA as it is a populous city with a diverse set of people living in it. 
-There have been multiple studies and claims that portray certain groups, certain crimes and certain areas as more susceptible to danger.We want to see what the conclusions can be for LA.
-In particular we want to know what factors like race, gender, area, time of crime and category of the crime affect the crime and who the victim might be. This in turn can help us determine the likelihood of certain crime occurring based on the factors and we can take preventive measures towards it.
-We will see if there correlation between the crimes and certain factors which can help us take decide on the precautionary measures to be taken in the future.
+---
+editor: 
+  markdown: 
+    wrap: sentence
+---
 
+# Introduction
+
+This project aims to understand, analyze and visualize crimes committed in the United States.
+We have selected Los Angeles as the city on which we conduct our analysis.
+We are interested in finding out who the susceptible victims for certain crimes are.
+We have picked Los Angeles as it is a populous metropolitan city, with a diverse set of people living in it.
+There have been multiple studies and claims that portray certain groups, certain crimes and certain areas as more susceptible to danger.
+We want to see what the conclusions can be for Los Angeles.
+
+USA Today claims that the crime rate in Los Angeles soared by 114% in certain neighborhoods from 2019 to 2022.
+These assertions piqued our interest in these questions[\[1\]](https://www.usatoday.com/story/news/2023/03/20/los-angeles-crime-rates-map-safest-neighborhoods/11032761002/).
+
+The questions we want to answer are:
+
+-    We want to know how factors like race, gender, area, time of crime and category of the crime affect the crime and who the victim might be.
+
+-   We want to see if COVID-19 has affected crime rates and what that affect has been.
+
+-   How the crime rates have progressed over the years for different neighborhoods.
+
+-   How the factors of gender, race and age influence the likelihood of experiencing a crime of a sexual nature.
+
+-   Determining what areas are good to live in according to crime rates and what crimes are prevalent in what areas.
+
+This in turn can help us determine the likelihood of certain crime occurring based on the above factors and that would allow the respective authorities to take preventive measures such as government policies and gun-control rules.
+We will see if there correlation between the crimes and certain factors which can help us take decide on the precautionary measures to be taken in the future.
