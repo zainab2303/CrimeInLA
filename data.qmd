@@ -8,7 +8,35 @@ Frequency of updates: The dataset is refreshed and updated weekly.
 
 Dimensions of the data (as downloaded on 27 November, 2023): (843515, 28)
 
-Columns of the dataset (with brackets containing our interpretation of the variable): DR_NO, Date Rptd \[Date Reported\], DATE OCC \[Date occurred\], TIME OCC \[Time occurred\], AREA, AREA NAME, Rpt Dist No \[Reported District number\], Oart 1-2, Crm Cd \[Crime committed\], Crm Cd Desc \[Crime committed description\], Mocodes, Vict Age \[Victime Age\], Vict Sex \[Victim Sex\], Vict Descent \[Victime Descent\], Premis Cd \[Premise Code\], Premis Desc \[Premise description\], Weapon Used Cd \[Weapon used code\], Weapon Desc \[Weapon description\], Status, Status Desc, Crm Cd 1, Crm Cd 2, Crm Cd 3, Crm Cd 4, LOCATION, Cross Street, LAT \[latitude\], LON \[longitude\]
+Columns of the dataset (with brackets containing our interpretation of the variable): 
+- DR_NO
+- Date Rptd \[Date Reported\]
+- DATE OCC \[Date occurred\]
+- TIME OCC \[Time occurred\]
+- AREA
+- AREA NAME
+- Rpt Dist No \[Reported District number\]
+- Oart 1-2
+- Crm Cd \[Crime committed\]
+- Crm Cd Desc \[Crime committed description\]
+- Mocodes
+- Vict Age \[Victime Age\]
+- Vict Sex \[Victim Sex\]
+- Vict Descent \[Victime Descent\]
+- Premis Cd \[Premise Code\]
+- Premis Desc \[Premise description\]
+- Weapon Used Cd \[Weapon used code\]
+- Weapon Desc \[Weapon description\]
+- Status
+- Status Desc
+- Crm Cd 1
+- Crm Cd 2
+- Crm Cd 3
+- Crm Cd 4
+- LOCATION
+- Cross Street
+- LAT \[latitude\]
+- LON \[longitude\]
 
 Each row represents one crime occurrence and the details of the crime and the victim.
 
@@ -19,6 +47,29 @@ Discovered issues within the dataset: • Time stamp in date columns are meaning
 We plan to import the data by downloading the CSV data file onto our local computer, and then working with it in RStudio by reading this file using read.csv. After we write the code for our project including graphs etc., we will use GitHub to collaborate with each other and contribute to our project.
 
 ## Description
+Research Plan:
+To answer our research questions listed in the introduction, we will follow the below plan.
+
+•	Firstly, we will analyze the missing values in our dataset as follows:
+(1)	If the victim description cells are blank with no value entered, we will drop those rows.
+(2)	While analysing how factors like victim sex and descent affect crime, if the crime committed is against an entity (for example shoplifting etc.), we will neglect the row. If the crime committed is against the person and the columns of sex and descent have ‘X’, then we will drop the rows.
+(3)	If the age is 0 but the columns of sex and descent do not have an ‘X’ entry, we will drop the row considering an age of zero years impossible.
+
+Then we will proceed to answer our research questions by performing the following proposed visualizations:
+•	How does the age factor affect the likelihood of a crime being committed against a victim? 
+We will plot a histogram with a 10-year grouping
+•	How does the sex factor affect the likelihood of a crime being committed against a victim? 
+We will plot a bar chart, with the sex on the x-axis.
+•	How does the descent factor affect the likelihood of a crime being committed against a victim? 
+We will plot a bar chart, with the descent on the x-axis.
+•	How does the time of crime affect the likelihood of a crime being committed?
+We will plot a histogram with an hourly grouping
+•	How does crime progress over the years and how did the Covid-19 pandemic affect this?
+We will utilize a time-series to visualize the number of crimes that took place over the range of date, which is 2020-present.
+•	What areas are best to live in according to crime occurrences, and which area is the best?
+We will use a Biplot to find the best area to live in. A mosaic plot can be used to find the correlation between type of crime and area of occurrence.
+•	To determine how factors like age, gender and race affect the likelihood of experiencing a crime of sexual nature?
+We will utilize PCA to find out how much variance the variables capture for the crimes of sexual nature.
 
 ## Missing value analysis
 
