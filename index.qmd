@@ -18,7 +18,7 @@ These assertions piqued our interest in these questions[\[1\]](https://www.usato
 
 The questions we want to answer are:
 
--    We want to know how factors like race, gender, area, time of crime and category of the crime affect the crime and who the victim might be.
+-   We want to know how factors like race, gender, area, time of crime and category of the crime affect the crime and who the victim might be.
 
 -   We want to see if COVID-19 has affected crime rates and what that affect has been.
 
