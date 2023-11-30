@@ -27,25 +27,53 @@ df <- read.csv("/Users/zainabshakruwala/Documents/Columbia/SEM 1/EDAV/R/Crime_Da
 ```
 
 ```{r}
+library(tidyverse)
+#Adding NA to blank values
 df[df==""]<-NA
-missing_values <- colSums(is.na(df))
+missing_percentage <- (colSums(is.na(df)) / nrow(df)) * 100
 
-# Create a dataframe for ggplot and sort in increasing order
+
 missing_df <- data.frame(
-  column = names(missing_values),
-  count = missing_values
+  column = names(missing_percentage),
+  percentage = missing_percentage
 )
 
-missing_df <- missing_df[order(missing_df$count), ]
+missing_df <- missing_df[order(missing_df$percentage), ]
 
-# Create ggplot horizontal bar plot for missing values
-ggplot(missing_df, aes(x = reorder(column, count), y = count)) +
+ggplot(missing_df, aes(x = reorder(column, percentage), y = percentage)) +
   geom_bar(stat = "identity", fill = "skyblue") +
   labs(
-    title = "Missing Values per Column",
+    title = "Percentage of Missing Values per Column",
     x = "Column",
-    y = "Number of Missing Values"
+    y = "Percentage of Missing Values"
   ) +
   theme_minimal() +
   coord_flip()
+```
+
+```{r}
+subset_size <- 50
+# Identify rows with missing values in specific columns
+rows_with_missing <- which(apply(df, 1, function(x) any(is.na(x))))
+
+# Identify columns with missing values in the selected rows
+columns_with_missing <- names(which(colSums(is.na(df[rows_with_missing, ])) > 50 & colSums(is.na(df[rows_with_missing, ])) < 700000))
+
+# Randomly subset rows with missing values in specific columns
+random_subset <- df[sample(rows_with_missing, subset_size), columns_with_missing, drop = FALSE]
+
+```
+
+```{r}
+tidydf <- random_subset %>% 
+    rownames_to_column("id") %>% 
+    gather(key, value, -id) %>% 
+    mutate(missing = ifelse(is.na(value), "yes", "no"))
+
+ggplot(tidydf, aes(x = key, y = fct_rev(id), fill = missing)) +
+  geom_tile(color = "white") + 
+  ggtitle("Missing Values of a Random Subset") +
+  ylab('Crime ID') + 
+  scale_fill_viridis_d() +
+  theme_bw()
 ```
