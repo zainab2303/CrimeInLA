@@ -27,11 +27,8 @@ df <- read.csv("/Users/zainabshakruwala/Documents/Columbia/SEM 1/EDAV/R/Crime_Da
 ```
 
 ```{r}
-unique(df$Crm.Cd.3)
-```
-
-```{r}
 library(tidyverse)
+#Adding NA to blank values
 df[df==""]<-NA
 missing_percentage <- (colSums(is.na(df)) / nrow(df)) * 100
 
@@ -62,26 +59,21 @@ rows_with_missing <- which(apply(df, 1, function(x) any(is.na(x))))
 # Identify columns with missing values in the selected rows
 columns_with_missing <- names(which(colSums(is.na(df[rows_with_missing, ])) > 50 & colSums(is.na(df[rows_with_missing, ])) < 700000))
 
-print(columns_with_missing)
 # Randomly subset rows with missing values in specific columns
 random_subset <- df[sample(rows_with_missing, subset_size), columns_with_missing, drop = FALSE]
-
-
-library(redav)
-plot_missing(random_subset, percent = FALSE)
 
 ```
 
 ```{r}
-tidycars <- random_subset %>% 
+tidydf <- random_subset %>% 
     rownames_to_column("id") %>% 
     gather(key, value, -id) %>% 
     mutate(missing = ifelse(is.na(value), "yes", "no"))
 
-ggplot(tidycars, aes(x = key, y = fct_rev(id), fill = missing)) +
+ggplot(tidydf, aes(x = key, y = fct_rev(id), fill = missing)) +
   geom_tile(color = "white") + 
-  ggtitle("mtcars with NAs added") +
-  ylab('') + 
-  scale_fill_viridis_d() + # discrete scale
+  ggtitle("Missing Values of a Random Subset") +
+  ylab('Crime ID') + 
+  scale_fill_viridis_d() +
   theme_bw()
 ```
