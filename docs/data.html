@@ -176,7 +176,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#description" id="toc-description" class="nav-link active" data-scroll-target="#description"><span class="header-section-number">2.1</span> Description</a></li>
-  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.2</span> Missing value analysis</a></li>
+  <li><a href="#research-plan" id="toc-research-plan" class="nav-link" data-scroll-target="#research-plan"><span class="header-section-number">2.2</span> Research Plan</a></li>
+  <li><a href="#missing-value-analysis" id="toc-missing-value-analysis" class="nav-link" data-scroll-target="#missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/zainab2303/CrimeInLA.git/edit/main/data.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/zainab2303/CrimeInLA.git/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -200,26 +201,128 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="description" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="description"><span class="header-section-number">2.1</span> Description</h2>
 <p>The data source that we draw on for the project is: https://catalog.data.gov/dataset/crime-data-from-2020-to-present , https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8 The data is collected by the Los Angeles Police Department (LAPD), via transcribing the original crime reports that are typed on paper.</p>
 <p>Format of the data: CSV file</p>
 <p>Frequency of updates: The dataset is refreshed and updated weekly.</p>
 <p>Dimensions of the data (as downloaded on 27 November, 2023): (843515, 28)</p>
-<p>Columns of the dataset (with brackets containing our interpretation of the variable): DR_NO, Date Rptd [Date Reported], DATE OCC [Date occurred], TIME OCC [Time occurred], AREA, AREA NAME, Rpt Dist No [Reported District number], Oart 1-2, Crm Cd [Crime committed], Crm Cd Desc [Crime committed description], Mocodes, Vict Age [Victime Age], Vict Sex [Victim Sex], Vict Descent [Victime Descent], Premis Cd [Premise Code], Premis Desc [Premise description], Weapon Used Cd [Weapon used code], Weapon Desc [Weapon description], Status, Status Desc, Crm Cd 1, Crm Cd 2, Crm Cd 3, Crm Cd 4, LOCATION, Cross Street, LAT [latitude], LON [longitude]</p>
+<p>Columns of the dataset:</p>
+<ul>
+<li><p>DR_NO</p>
+<p>Division of Records Number: Official file number made up of a 2 digit year, area ID, and 5 digits</p></li>
+<li><p>Date Rptd [Date Reported]</p>
+<p>MM/DD/YYYY</p></li>
+<li><p>DATE OCC [Date occurred]</p>
+<p>MM/DD/YYYY</p></li>
+<li><p>TIME OCC [Time occurred]</p>
+<p>In 24 hour military time</p></li>
+<li><p>AREA</p>
+<p>The LAPD has 21 Community Police Stations referred to as Geographic Areas within the department. These Geographic Areas are sequentially numbered from 1-21.</p></li>
+<li><p>AREA NAME</p>
+<p>The 21 Geographic Areas or Patrol Divisions are also given a name designation that references a landmark or the surrounding community that it is responsible for. For example 77th Street Division is located at the intersection of South Broadway and 77th Street, serving neighborhoods in South Los Angeles</p></li>
+<li><p>Rpt Dist No</p>
+<p>A four-digit code that represents a sub-area within a Geographic Area. All crime records reference the “RD” that it occurred in for statistical comparisons</p></li>
+<li><p>Part 1-2</p></li>
+<li><p>Crm Cd</p>
+<p>Indicates the crime committed. (Same as Crime Code 1)</p></li>
+<li><p>Crm Cd Desc [Crime committed description]</p>
+<p>Defines the Crime Code provided.</p></li>
+<li><p>Mocodes</p>
+<p>Modus Operandi: Activities associated with the suspect in commission of the crime</p></li>
+<li><p>Vict Age</p>
+<p>Two character numeric</p></li>
+<li><p>Vict Sex</p>
+<p>F - Female M - Male X - Unknown</p></li>
+<li><p>Vict Descent</p>
+<p>Descent Code: A - Other Asian B - Black C - Chinese D - Cambodian F - Filipino G - Guamanian H - Hispanic/Latin/Mexican I - American Indian/Alaskan Native J - Japanese K - Korean L - Laotian O - Other P - Pacific Islander S - Samoan U - Hawaiian V - Vietnamese W - White X - Unknown Z - Asian Indian</p></li>
+<li><p>Premis Cd</p>
+<p>The type of structure, vehicle, or location where the crime took place.</p></li>
+<li><p>Premis Desc</p>
+<p>Defines the Premise Code provided.</p></li>
+<li><p>Weapon Used Cd</p>
+<p>The type of weapon used in the crime.</p></li>
+<li><p>Weapon Desc</p>
+<p>Defines the Weapon Used Code provided.</p></li>
+<li><p>Status</p>
+<p>Status of the case. (IC is the default)</p></li>
+<li><p>Status Desc</p>
+<p>Defines the Status Code provided</p></li>
+<li><p>Crm Cd 1</p>
+<p>Indicates the crime committed. Crime Code 1 is the primary and most serious one. Crime Code 2, 3, and 4 are respectively less serious offenses. Lower crime class numbers are more serious.</p></li>
+<li><p>Crm Cd 2</p>
+<p>May contain a code for an additional crime, less serious than Crime Code 1.</p></li>
+<li><p>Crm Cd 3</p>
+<p>May contain a code for an additional crime, less serious than Crime Code 1</p></li>
+<li><p>Crm Cd 4</p>
+<p>May contain a code for an additional crime, less serious than Crime Code 1</p></li>
+<li><p>LOCATION</p>
+<p>Street address of crime incident rounded to the nearest hundred block to maintain anonymity.</p></li>
+<li><p>Cross Street</p>
+<p>Cross Street of rounded Address</p></li>
+<li><p>LAT</p>
+<p>Latitude</p></li>
+<li><p>LON</p>
+<p>Longitude</p></li>
+</ul>
 <p>Each row represents one crime occurrence and the details of the crime and the victim.</p>
 <p>Known issues within the dataset: Since it consists of records that were typed on paper, it may have inaccuracies by humans. Additionally, the address fields are only provided to the nearest hundred block to maintain privacy. Location fields are missing in some cases, and have been replaced by (0°, 0°).</p>
-<p>Discovered issues within the dataset: • Time stamp in date columns are meaningless, since there is a time of occurrence column separately, and all the times in the date column are the beginning of the day. • X is present in the victim description columns like sex and descent. We will consider these to be instances where the victim would have preferred to be anonymous. • There exist rows where though the sex and descent columns are meaningful (not X), the age column contains a 0 (which might seem impossible).</p>
+<p>Discovered issues within the dataset:</p>
+<ul>
+<li><p>Time stamp in date columns are meaningless, since there is a time of occurrence column separately, and all the times in the date column are the beginning of the day.</p></li>
+<li><p>X is present in the victim description columns like sex and descent. We will consider these to be instances where the victim would have preferred to be anonymous.</p></li>
+<li><p>There exist rows where though the sex and descent columns are meaningful (not X), the age column contains a 0 (which might seem impossible).</p></li>
+</ul>
 <p>We plan to import the data by downloading the CSV data file onto our local computer, and then working with it in RStudio by reading this file using read.csv. After we write the code for our project including graphs etc., we will use GitHub to collaborate with each other and contribute to our project.</p>
-<section id="description" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="description"><span class="header-section-number">2.1</span> Description</h2>
 </section>
-<section id="missing-value-analysis" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.2</span> Missing value analysis</h2>
+<section id="research-plan" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="research-plan"><span class="header-section-number">2.2</span> Research Plan</h2>
+<p>To answer our research questions listed in the introduction, we will follow the below plan.</p>
+<p>• Firstly, we will analyze the missing values in our dataset as follows:</p>
+<ol type="1">
+<li><p>If the victim description cells are blank with no value entered, we will drop those rows.</p></li>
+<li><p>While analysing how factors like victim sex and descent affect crime, if the crime committed is against an entity (for example shoplifting etc.), we will neglect the row. If the crime committed is against the person and the columns of sex and descent have ‘X’, then we will drop the rows.</p></li>
+<li><p>If the age is 0 but the columns of sex and descent do not have an ‘X’ entry, we will drop the row considering an age of zero years impossible.</p></li>
+</ol>
+<p>Then we will proceed to answer our research questions by performing the following proposed visualizations:</p>
+<ul>
+<li>How does the age factor affect the likelihood of a crime being committed against a victim?</li>
+</ul>
+<p>We will plot a histogram with a 10-year grouping</p>
+<ul>
+<li>How does the sex factor affect the likelihood of a crime being committed against a victim?</li>
+</ul>
+<p>We will plot a bar chart, with the sex on the x-axis.</p>
+<ul>
+<li>How does the descent factor affect the likelihood of a crime being committed against a victim?</li>
+</ul>
+<p>We will plot a bar chart, with the descent on the x-axis.</p>
+<ul>
+<li>How does the time of crime affect the likelihood of a crime being committed?</li>
+</ul>
+<p>We will plot a histogram with an hourly grouping</p>
+<ul>
+<li>How does crime progress over the years and how did the Covid-19 pandemic affect this?</li>
+</ul>
+<p>We will utilize a time-series to visualize the number of crimes that took place over the range of date, which is 2020-present.</p>
+<ul>
+<li>What areas are best to live in according to crime occurrences, and which area is the best?</li>
+</ul>
+<p>We will use a Biplot to find the best area to live in. A mosaic plot can be used to find the correlation between type of crime and area of occurrence.</p>
+<ul>
+<li>To determine how factors like age, gender and race affect the likelihood of experiencing a crime of sexual nature?</li>
+</ul>
+<p>We will utilize PCA to find out how much variance the variables capture for the crimes of sexual nature.</p>
+</section>
+<section id="missing-value-analysis" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="missing-value-analysis"><span class="header-section-number">2.3</span> Missing value analysis</h2>
 <div class="cell">
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/Users/zainabshakruwala/Documents/Columbia/SEM 1/EDAV/R/Crime_Data_from_2020_to_Present.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<p>Our first plot will showcase the percentage of missing values in each column so that we are made aware of the columns that have mostly missing values (that can be dropped or not be paid attention to in our analysis), and which will also let us understand which variables to focus on to see if there are patterns in missing value columns across crime records.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -265,6 +368,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>From the above, we observe that Crm.Cd.4 and Crm.Cd.3 have close to 100% missing values (which are less serious crimes than code 1). The columns of Crm.Cd.2 and Cross.Street also have considerable amount of missing values (&gt;75%). Information of the weapon that was used encoded in columns like Weapon.Used.Cd and Weapon.Desc have more than 50% missing values, which makes sense because some crimes do not involve the use of weapons to be committed. Mocodes, Victim Age and Victim Sex are columns that have around 12% missing values, and their probable reasons have been stated previously in the research plan. Premise Description also has negligible but non-zero missing values in its column. The other columns have zero missing values.</p>
+<p>So, to analyse the patterns in missing values across columns that have atleast one missing value (since our dataset is too large and analysing all records clearly will not be feasible), we will focus on those columns that firstly have atleast one missing value and secondly have the number of missing values in the range of 50 to 700000. This will allow us to ignore the Crm.Cd columns which are missing for most records, and observe the pattern that a random subset of 50 crime records have with respect to their values of the columns that satisfy this criteria. The subset of 50 is also chosen so that we clearly observe the records on the y axis.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -298,6 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="data_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>We observe from the above plot that there is some correlation between the occurrence of a missing value entry for victim age and victim sex, since they both go missing simultaneously. This supports our hypothesis stated in the research plan, where we proposed that since the crime in such cases could be caused against some entity or company instead of a singular individual, such details become irrelevant and hence are missing. Since the missing value percentage of Premis.Desc column was very low, our random subset has no missing values in this column. As expected, on the other hand, the columns of Weapon related information have higher number of missing values since their percentage was higher too, hence records are more probable to have them missing (both missing at the same time). Mocodes which stands for Modus Operandi refers to activities associated with the suspect in commission of the crime. This also has a strong correlation with the victim age and sex in terms of missing values.</p>
 
 
 </section>
