@@ -42,6 +42,8 @@ Columns of the dataset:
 
 -   Part 1-2
 
+    Not explained
+
 -   Crm Cd
 
     Indicates the crime committed. (Same as Crime Code 1)
@@ -181,7 +183,7 @@ We will utilize PCA to find out how much variance the variables capture for the 
 ## Missing value analysis
 
 ```{r}
-df <- read.csv("/Users/zainabshakruwala/Documents/Columbia/SEM 1/EDAV/R/Crime_Data_from_2020_to_Present.csv")
+df <- read.csv("/Users/anerimodi/Downloads/Crime_Data_from_2020_to_Present.csv")
 ```
 
 Our first plot will showcase the percentage of missing values in each column so that we are made aware of the columns that have mostly missing values (that can be dropped or not be paid attention to in our analysis), and which will also let us understand which variables to focus on to see if there are patterns in missing value columns across crime records.
