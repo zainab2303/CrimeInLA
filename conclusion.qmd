@@ -1,1 +1,23 @@
 # Conclusion
+
+---
+title: "Conclusion"
+format: html
+editor: visual
+---
+
+## Main takeaways from our exploration
+
+Exploring the Crime In LA dataset showed us how we could utilize R and D3 to effectively note aspects of a dataset related to crime, involving distributions, associations, time series, and spatial patterns. We observed that the ages of 20-30 years are where most victims of crime in LA hold, that Hispanics are most susceptible to crime, that females take longer to file a report than males majorly, and that the Vovid pandemic did have an effect on crime in LA. We also observed how the red MTA line was where most crime occurred out of all lines, and that the late hours of the night was when most crime occurred, as we expect.
+
+## Limitations
+
+The limitations of our project involve the short length of the time period our dataset covers (only from 2020-2023), so that we could not explore long term time-series graphs and trends. Secondly, our exploration involves cleaning the data as per our interpretation, which included removing victims that did not identify as Female/Male. Also, we do not have the proportion of populations in terms of descent and geographical location, which limits our ability to make conclusive statements about our bar chart of crime count vs descent and the spatial map, since a higher crime count might be because the population of that group/ location is high.
+
+## Lessons learned
+
+Our EDAV project taught us how to practice the theory that we learned in class to a real-world dataset that contains problems such as missing values and dummy entries. We understood that version control using Git is a very useful and necessary tool when collaborating with teammates on a project. We learned the importance of choosing the correct visualization to accurately display data, while also staying true to the narrative we are trying to depict. We also realized the usage of effective interactivity to elevate the user experience.
+
+## Future directions
+
+For our project, we aim to further exploring relations between features present in our data that we did not perform such as the Geographical area (West, East, etc.). We also look forward to making our code more reproducible to other states in the United States, so that a modular code can be written and run for any state's dataset for ease of analyzing crime. Additionally, we would like to perform predictive analytics and predict the likelihood of crime occurring given a person's details.
