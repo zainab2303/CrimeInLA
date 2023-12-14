@@ -50,9 +50,9 @@
   <input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"> PM</label>
 </div>
 
-<div class="clock"></div>
+<div id="clock"></div>
   <label>Probablity of a crime occuring based on Gender during that time</label>
-<div class="bar-chart"></div>
+<div id="bar-chart"></div>
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="scripts/myscript.js"></script>
