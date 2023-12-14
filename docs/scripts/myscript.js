@@ -74,13 +74,13 @@
         function displayDataForHour(hour) {
             const selectedData = dataset.find(data => +data.time_bin === hour);
 
-            d3.select(".bar-chart").selectAll("svg").remove();
+            d3.select("div#bar-chart").selectAll("svg").remove();
 
             const width=600;
             const height=300;
             const margin={top:90,right:30,bottom:10,left:0};
 
-            const barChartSvg = d3.select(".bar-chart")
+            const barChartSvg = d3.select("div#bar-chart")
                 .append("svg")
                 .attr("width", width)
                 .attr("height", height);
