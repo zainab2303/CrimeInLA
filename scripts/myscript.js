@@ -11,7 +11,7 @@
         const svg = d3.select("div#plot")
                     .append("svg")
                     .attr("width", 400)
-                    .attr("height", 600)
+                    .attr("height", 400)
 
         const clock = d3.select("div#clock")
             .append("svg")
@@ -25,7 +25,7 @@
 
         const hourMarkers = Array.from({ length: 12 }, (_, i) => i + 1);
 
-        svg.selectAll("div#hour-marker")
+        svg.selectAll(".hour-marker")
             .data(hourMarkers)
             .enter().append("circle")
             .attr("class", "hour-marker")
@@ -36,10 +36,10 @@
 
         function handleHourMarkerClick(d) {
 
-            d3.selectAll("div#hour-marker").classed("selected-hour", false);
+            d3.selectAll(".hour-marker").classed("selected-hour", false);
             d3.select(this).classed("selected-hour", true);
 
-            svg.selectAll("div#hour-sector").remove();
+            svg.selectAll(".hour-sector").remove();
             svg.append("path")
                 .attr("class", "hour-sector")
                 .attr("d", getSectorPath(30 * d - 15, 30 * d + 15))
@@ -71,13 +71,13 @@
         function displayDataForHour(hour) {
             const selectedData = dataset.find(data => +data.time_bin === hour);
 
-            d3.select("div#bar-chart").selectAll("svg").remove();
+            d3.select(".bar-chart").selectAll("svg").remove();
 
             const width=600;
             const height=300;
             const margin={top:90,right:30,bottom:10,left:0};
 
-            const barChartSvg = d3.select("div#bar-chart")
+            const barChartSvg = d3.select(".bar-chart")
                 .append("svg")
                 .attr("width", width)
                 .attr("height", height);
