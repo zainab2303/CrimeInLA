@@ -10,11 +10,11 @@
             stroke-width: 2;
         }
         .selected-hour {
-            fill: coral;
+            fill: red;
         }
         .hour-sector {
             fill: none;
-            stroke: lightgreen;
+            stroke: black;
             stroke-width: 2;
         }
         .bar-chart {
@@ -44,16 +44,14 @@
 <h2>Check Your Safety According to the hour</h2>
 <label>Select The time in a 12 hour</label>
 <div class="button-container">
-    <label class="radio-button">
-        <input type="radio" name="period" value="AM" checked onchange="updatePeriod('AM')"> AM
-    </label>
-    <label class="radio-button">
-        <input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"> PM
-    </label>
+  <label class="radio-button">
+ <input type="radio" name="period" value="AM" checked onchange="updatePeriod('AM')"> AM</label>
+  <label class="radio-button">
+  <input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"> PM</label>
 </div>
 
 <div class="clock"></div>
-<label>Probablity of a crime occuring based on Gender during that time</label>
+  <label>Probablity of a crime occuring based on Gender during that time</label>
 <div class="bar-chart"></div>
 
 <script src="https://d3js.org/d3.v5.min.js"></script>

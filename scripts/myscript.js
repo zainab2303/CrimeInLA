@@ -8,7 +8,7 @@
 
     d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv").then(function(dataset) {
          // Store the data in the global variable
-        const svg = d3.select("div#id")
+        const svg = d3.select("div#plot")
                     .append("svg")
                     .attr("width", 400)
                     .attr("height", 600)

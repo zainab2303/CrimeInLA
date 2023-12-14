@@ -39,6 +39,6 @@
     "href": "d3graph.html",
     "title": "4  Interactive graph",
     "section": "",
-    "text": "Safety Checker\n\n\nCheck Your Safety According to the hour\n\nSelect The time in a 12 hour\n\n&lt;label class=\"radio-button\"&gt;\n    &lt;input type=\"radio\" name=\"period\" value=\"AM\" checked onchange=\"updatePeriod('AM')\"&gt; AM\n&lt;/label&gt;\n&lt;label class=\"radio-button\"&gt;\n    &lt;input type=\"radio\" name=\"period\" value=\"PM\" onchange=\"updatePeriod('PM')\"&gt; PM\n&lt;/label&gt;\n\n\n\n\nProbablity of a crime occuring based on Gender during that time"
+    "text": "Safety Checker\n\n\nCheck Your Safety According to the hour\n\nSelect The time in a 12 hour\n\n  AM   PM\n\n\n\n\nProbablity of a crime occuring based on Gender during that time"
   }
 ]
