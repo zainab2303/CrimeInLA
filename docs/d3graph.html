@@ -169,11 +169,11 @@ ul.task-list li input[type="checkbox"] {
             stroke-width: 2;
         }
         .selected-hour {
-            fill: coral;
+            fill: red;
         }
         .hour-sector {
             fill: none;
-            stroke: lightgreen;
+            stroke: black;
             stroke-width: 2;
         }
         .bar-chart {
@@ -207,12 +207,7 @@ Check Your Safety According to the hour
 </h2>
 <label>Select The time in a 12 hour</label>
 <div class="button-container">
-<pre><code>&lt;label class="radio-button"&gt;
-    &lt;input type="radio" name="period" value="AM" checked onchange="updatePeriod('AM')"&gt; AM
-&lt;/label&gt;
-&lt;label class="radio-button"&gt;
-    &lt;input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"&gt; PM
-&lt;/label&gt;</code></pre>
+<p><label class="radio-button"> <input type="radio" name="period" value="AM" checked="" onchange="updatePeriod('AM')"> AM</label> <label class="radio-button"> <input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"> PM</label></p>
 </div>
 <div class="clock">
 
