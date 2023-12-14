@@ -1,7 +1,7 @@
 # Conclusion
 
 ---
-title: "conclusion_local"
+title: "Conclusion"
 format: html
 editor: visual
 ---
