@@ -39,8 +39,11 @@
             d3.selectAll(".hour-marker").classed("selected-hour", false);
             d3.select(this).classed("selected-hour", true);
 
-            svg.selectAll(".hour-sector").remove();
-            svg.append("path")
+            if (selectedHourSector){
+              selectedHourSector.remove()
+            }
+            //svg.selectAll(".hour-sector").remove();
+            selectedHourSector = svg.append("path")
                 .attr("class", "hour-sector")
                 .attr("d", getSectorPath(30 * d - 15, 30 * d + 15))
                 .attr("transform", "translate(100,100)");
@@ -71,7 +74,7 @@
         function displayDataForHour(hour) {
             const selectedData = dataset.find(data => +data.time_bin === hour);
 
-            d3.select(".bar-chart").selectAll("svg").remove();
+            d3.select(".bar-chart").selectAll("svg> *").remove();
 
             const width=600;
             const height=300;
