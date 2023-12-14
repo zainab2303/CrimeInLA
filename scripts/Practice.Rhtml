@@ -1,4 +1,67 @@
-// add your JavaScript/D3 to this file
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive D3 Clock with Bar Chart</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <style>
+        .clock {
+            margin: 50px;
+        }
+        .hour-marker {
+            fill: black;
+            stroke: white;
+            stroke-width: 2;
+        }
+        .selected-hour {
+            fill: red;
+        }
+        .hour-sector {
+            fill: none;
+            stroke: black;
+            stroke-width: 2;
+        }
+        .bar-chart {
+            margin-top: 20px;
+            height: auto;
+        }
+        .bar-f {
+            fill: pink;
+        }
+        .bar-m {
+            fill: lightblue;
+        }
+        .axis {
+            font-size: 12px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .radio-button {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Safety Checker</h1>
+<h2>Check Your Safety According to the hour</h2>
+<label>Select The time in a 12 hour</label>
+<div class="button-container">
+    <label class="radio-button">
+        <input type="radio" name="period" value="AM" checked onchange="updatePeriod('AM')"> AM
+    </label>
+    <label class="radio-button">
+        <input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"> PM
+    </label>
+</div>
+
+<div class="clock"></div>
+<label>Probablity of a crime occuring based on Gender during that time</label>
+<div class="bar-chart"></div>
+
+
+<script>
 
        let currentPeriod = 'AM';
        function updatePeriod(period) {
@@ -6,26 +69,22 @@
 
         }
 
-    d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/data/Safety.csv").then(function(dataset) {
-         // Store the data in the global variable
-        const svg = d3.select("div#id")
-                    .append("svg")
-                    .attr("width", 400)
-                    .attr("height", 600)
+    d3.csv("Safety.csv").then(function(dataset) {
 
-        const clock = d3.select("div#clock")
+
+        const svg = d3.select(".clock")
             .append("svg")
             .attr("width",200)
             .attr("height", 300);
 
-        const barChartSvg = d3.select("div#bar-chart")
+        const barChartSvg = d3.select(".bar-chart")
             .append("svg")
             .attr("width", 400)
             .attr("height", 800);
 
         const hourMarkers = Array.from({ length: 12 }, (_, i) => i + 1);
 
-        svg.selectAll("div#hour-marker")
+        svg.selectAll(".hour-marker")
             .data(hourMarkers)
             .enter().append("circle")
             .attr("class", "hour-marker")
@@ -36,10 +95,10 @@
 
         function handleHourMarkerClick(d) {
 
-            d3.selectAll("div#hour-marker").classed("selected-hour", false);
+            d3.selectAll(".hour-marker").classed("selected-hour", false);
             d3.select(this).classed("selected-hour", true);
 
-            svg.selectAll("div#hour-sector").remove();
+            svg.selectAll(".hour-sector").remove();
             svg.append("path")
                 .attr("class", "hour-sector")
                 .attr("d", getSectorPath(30 * d - 15, 30 * d + 15))
@@ -71,13 +130,13 @@
         function displayDataForHour(hour) {
             const selectedData = dataset.find(data => +data.time_bin === hour);
 
-            d3.select("div#bar-chart").selectAll("svg").remove();
+            d3.select(".bar-chart").selectAll("svg").remove();
 
             const width=600;
             const height=300;
             const margin={top:90,right:30,bottom:10,left:0};
 
-            const barChartSvg = d3.select("div#bar-chart")
+            const barChartSvg = d3.select(".bar-chart")
                 .append("svg")
                 .attr("width", width)
                 .attr("height", height);
@@ -101,7 +160,6 @@
                 .attr("height",d=>height-margin.top-margin.bottom-yScale(+selectedData[d]));
 
 
-
             barChartSvg.selectAll("text.bar-label")
             .data(["F","M"])
             .enter().append("text")
@@ -113,10 +171,13 @@
 
 
 
+
+
             barChartSvg.append("g")
                 .attr("class", "axis")
                 .attr("transform", `translate(0, ${200})`)
                 .call(d3.axisBottom(xScale));
+
 
             barChartSvg.append("g")
                 .attr("class", "axis")
@@ -126,3 +187,7 @@
 
 
     });
+</script>
+
+</body>
+</html>
