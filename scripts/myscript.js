@@ -39,6 +39,7 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
 
         let selectedHour2 = d;
 
+        //Checking the current period to display accordingly
         if (currentPeriod === "PM" && d !== 12) {
             selectedHour2 += 12;
         }
@@ -46,6 +47,7 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
         displayDataForHour(selectedHour2);
     }
 
+    // Making Sector for clarity :)
     function getSectorPath(startAngle, endAngle) {
         const radius = 90;
         const startRadians = (startAngle - 90) * (Math.PI / 180);
@@ -60,6 +62,7 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
         return `M 0 0 L ${x1} ${y1} A ${radius} ${radius} 0 0 1 ${x2} ${y2} Z`;
     }
 
+    //Making bar chart according to the hour selected
     function displayDataForHour(hour) {
         const selectedData = dataset.find(data => +data.time_bin === hour);
 
@@ -91,7 +94,7 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
         const yAxis = d3.axisLeft()
                       .scale(yScale).ticks(5).tickFormat(d3.format("0.3f"));
 
-
+        //The Bars!
         barChartSvg.selectAll("rect")
             .data(["F", "M"])
             .enter().append("rect")
@@ -101,6 +104,7 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
             .attr("width", xScale.bandwidth())
             .attr("height", d => innerHeight- yScale(+selectedData[d]));
 
+        //text to display probablity
         barChartSvg.selectAll("text.bar-label")
             .data(["F", "M"])
             .enter().append("text")
@@ -110,11 +114,13 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
             .attr("text-anchor", "middle")
             .text(d => selectedData[d]);
 
+        //xAxis
         barChartSvg.append("g")
             .attr("class", "xAxis")
             .attr("transform", `translate(${margin.left}, ${height - margin                                                                           .bottom})`)
             .call(xAxis);
 
+        //yAxis
         barChartSvg.append("g")
             .attr("class", "yAxis")
             .attr("transform", `translate(${margin.left},${margin.top})`)
