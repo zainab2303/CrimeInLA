@@ -1,4 +1,3 @@
-
 ---
 title: "d3part"
 format: html
@@ -29,35 +28,21 @@ df_d3<-df_d3 %>%
 ```
 
 ```{r}
-df_d4<-df_d3
-df_d4<-df_d4 %>%
-  group_by(time_bin)%>%
-  summarise(total=sum(prob),
-            .groups = 'drop')
+df_d3$prob<-(df_d3$prob)/620324
 ```
 
 ```{r}
-getval<-function(c1, data=df_d4) {
-    data$total[data$time_bin==c1]}
-```
-
-```{r}
-totals <- numeric(24) 
-for (i in 1:24) {
-  totals[i] <- getval(i)
-}
-totals <- rep(totals, each = 2)
-
-df_d3 <- cbind(df_d3, new_column = totals)
-```
-
-```{r}
-df_d3$prob<-df_d3$prob/df_d3$new_column
-```
-
-```{r}
-df_d3 <- df_d3[, -which(names(df_d3) == "new_column")]
 df_d3$prob<-round(df_d3$prob,3)
+```
+
+```{r}
 df_d3 <- df_d3 %>% pivot_wider(names_from = Vict.Sex, values_from = prob)
+```
+
+```{r}
+df_d3
+```
+
+```{r}
 write.csv(df_d3,"Safety.csv", row.names = FALSE) 
 ```

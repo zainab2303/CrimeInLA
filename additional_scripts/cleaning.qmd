@@ -1,0 +1,98 @@
+---
+title: "Cleaning"
+format: html
+editor: visual
+---
+
+## Cleaning of our Dataset
+
+On observing the Crime instances in LA dataset, we will start off by removing the missing values as per our Missing Value section.
+
+```{r}
+df_cleaned<-read.csv('Crime_Data_from_2020_to_Present.csv')
+```
+
+Dropping columns with more than 75% missing values (as obtained from our horizontal bar chart in the missing value analysis:
+
+```{r}
+df_cleaned = select(df_cleaned, -Crm.Cd.4, -Crm.Cd.3, -Crm.Cd.2, -Cross.Street,-Part.1.2)
+```
+
+Since we would be working with the Weapon used columns, we will not be dropping them, and will instead replace the NA/blank cells with a meaningful replacement:
+
+```{r}
+df_cleaned$Weapon.Desc[df_cleaned$Weapon.Desc=='']<-'NO WEAPON'
+df_cleaned$Weapon.Used.Cd[is.na(df_cleaned$Weapon.Used.Cd)] <- 0
+```
+
+To begin, we will replace the 'X' values that occur in the Victim Sex and Victim descent with NA, and the 0 values in Victim Age with NA values, so that we can drop such rows afterwards.
+
+```{r}
+
+df_cleaned<-df_cleaned %>%
+  replace_with_na(replace = list(Vict.Descent = c('X'), Vict.Sex = c('X'),Vict.Age=c(0)))
+
+```
+
+Dropping all rows in our dataframe that contains an NA value:
+
+```{r}
+df_cleaned<-na.omit(df_cleaned)
+```
+
+Now, for the next step in our cleaning, we will proceed to convert the time columns to a more readable format:
+
+```{r}
+df_cleaned <- separate(df_cleaned, Date.Rptd, into = c("Date_Reported", "Rest"), sep = "\\s+", extra = "merge")
+df_cleaned <- separate(df_cleaned, DATE.OCC, into = c("Date_Occurred", "Rest"), sep = "\\s+", extra = "merge")
+```
+
+```{r}
+df_cleaned = select(df_cleaned, -Rest)
+```
+
+Now, we convert the time given in integer to a 24 hour time format as follows:
+
+```{r}
+df_cleaned$TIME.OCC <- strptime(sprintf("%04d", df_cleaned$TIME.OCC), format = "%H%M")
+df_cleaned <- separate(df_cleaned, TIME.OCC, into = c("Rest", "Time of Occurrence"), sep = "\\s+", extra = "merge")
+df_cleaned = select(df_cleaned, -Rest)
+```
+
+Converting the date columns to DATE class:
+
+```{r}
+df_cleaned$Date_Reported <- as.Date(df_cleaned$Date_Reported, format = "%m/%d/%Y")
+df_cleaned$Date_Occurred <- as.Date(df_cleaned$Date_Occurred, format = "%m/%d/%Y")
+```
+
+Minor additional cleaning steps also involve the following:
+
+\(i\) removing all impossible ages from our dataset for better visualization. For this, we will remove ages that are negative and those that are greater than 100.
+
+```{r}
+df_cleaned <- subset(df_cleaned, Vict.Age >0 & Vict.Age <=100) 
+```
+
+\(ii\) Keep only the Sex of Male and Female values (there were 87 'H' instances and blank cells which we do not include.
+
+```{r}
+df_cleaned <- subset(df_cleaned, Vict.Sex =='F' | Vict.Sex =='M') 
+```
+
+(iii) Keep only the Descent that is sensible, (i.e. which is not - or blank cell).
+
+```{r}
+df_cleaned <- subset(df_cleaned, Vict.Descent !='-' & Vict.Descent !='') 
+```
+
+\(iv\) For the Victim descent, we observe that though there is a descent A: Other Asian, there are also C: Chinese, K: Korean etc who should also be included in the Asian category. Hence, we will manipulate these descents to be included in one of the top five frequent descents (A: Asian, O: Other, B: Black, H: Hispanic, W: White)
+
+```{r}
+df_cleaned$Vict.Descent[df_cleaned$Vict.Descent=='C'|df_cleaned$Vict.Descent=='Z'| df_cleaned$Vict.Descent=='V'| df_cleaned$Vict.Descent=='J'| df_cleaned$Vict.Descent=='K'| df_cleaned$Vict.Descent=='F'| df_cleaned$Vict.Descent=='D'| df_cleaned$Vict.Descent=='L']<-'A'
+df_cleaned$Vict.Descent[df_cleaned$Vict.Descent=='P'|df_cleaned$Vict.Descent=='S'| df_cleaned$Vict.Descent=='U'| df_cleaned$Vict.Descent=='G'| df_cleaned$Vict.Descent=='I']<-'O'
+```
+
+```{r}
+write.csv(df_cleaned,"cleaned.csv", row.names = FALSE) 
+```
