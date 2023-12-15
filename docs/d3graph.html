@@ -161,60 +161,60 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <style>
-  .clock {
-            margin: 50px;
-        }
-        .hour-marker {
-            fill: black;
-            stroke: white;
-            stroke-width: 2;
-        }
-        .selected-hour {
-            fill: red;
-        }
-        .hour-sector {
-            fill: none;
-            stroke: black;
-            stroke-width: 2;
-        }
-        .bar-chart {
-            margin-top: 20px;
-            height: auto;
-        }
-        .bar-f {
-            fill: pink;
-        }
-        .bar-m {
-            fill: lightblue;
-        }
-        .axis {
-            font-size: 12px;
-        }
-        .button-container {
-            margin-top: 20px;
-        }
-        .radio-button {
-            margin-right: 10px;
-        }
+    .clock {
+        margin: 50px;
+    }
+    .hour-marker {
+        fill: black;
+        stroke: white;
+        stroke-width: 2;
+    }
+    .selected-hour {
+        fill: red;
+    }
+    .hour-sector {
+        fill: none;
+        stroke: black;
+        stroke-width: 2;
+    }
+    .bar-chart {
+        margin-top: 20px;
+        height: auto;
+    }
+    .bar-f {
+        fill: pink;
+    }
+    .bar-m {
+        fill: lightblue;
+    }
+    .axis {
+        font-size: 12px;
+    }
+    .button-container {
+        margin-top: 20px;
+    }
+    .radio-button {
+        margin-right: 10px;
+    }
 </style>
-<div id="plot">
-
-</div>
 <h1>
 Safety Checker
 </h1>
 <h2 class="anchored">
-Check Your Safety According to the hour
+Check Your Safety According to the Hour
 </h2>
-<label>Select The time in a 12 hour</label>
+<label>Select The Time in a 12-hour Format</label>
 <div class="button-container">
-<p><label class="radio-button"> <input type="radio" name="period" value="AM" checked="" onchange="updatePeriod('AM')"> AM</label> <label class="radio-button"> <input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"> PM</label></p>
+<p><label class="radio-button"> <input type="radio" name="period" value="AM" checked="" onchange="updatePeriod('AM')"> AM</label> <label class="radio-button"><input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"> PM</label></p>
 </div>
 <div id="clock">
 
 </div>
-<label>Probablity of a crime occuring based on Gender during that time</label>
+<label>Probability of a Crime Occurring Based on Gender During That Time</label>
 <div id="bar-chart">
+
+</div>
+<div id="plot">
 
 </div>
 <script src="https://d3js.org/d3.v5.min.js"></script>
