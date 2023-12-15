@@ -1,32 +1,23 @@
-let selectedHourSector; // Added variable declaration
+let selectedHourSector; //  variable To select the desired hour
 
-let currentPeriod = 'AM';
+let currentPeriod = 'AM'; //Variable to select AM PM, default is set to AM
 
-function updatePeriod(period) {
-    currentPeriod = period;
+function updatePeriod(period) { //Function to update the variable according to AM and PM
+    currentPeriod = period; // Setting currentPeriod as the selected variable AM or PM
 }
 
+//loading the data from github
 d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv").then(function (dataset) {
     const svg = d3.select("div#plot")
         .append("svg")
-        .attr("width", 400)
+        .attr("width", 200) //svg element
         .attr("height", 400);
-
-    const clock = d3.select("div#clock")
-        .append("svg")
-        .attr("width", 200)
-        .attr("height", 300);
-
-    const barChartSvg = d3.select("div#bar-chart")
-        .append("svg")
-        .attr("width", 400)
-        .attr("height", 800);
 
     const hourMarkers = Array.from({ length: 12 }, (_, i) => i + 1);
 
     svg.selectAll(".hour-marker")
         .data(hourMarkers)
-        .enter().append("circle")
+        .enter().append("circle") //making a clock
         .attr("class", "hour-marker")
         .attr("cx", d => 100 + 80 * Math.cos((d * 30 - 90) * (Math.PI / 180)))
         .attr("cy", d => 100 + 80 * Math.sin((d * 30 - 90) * (Math.PI / 180)))
@@ -74,9 +65,11 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
 
         d3.select("div#bar-chart").selectAll("svg").remove();
 
-        const width = 600;
+        const width = 500;
         const height = 300;
-        const margin = { top: 90, right: 30, bottom: 10, left: 0 };
+        const margin = { top: 90, right: 0, bottom: 50, left: 40 };
+        const innerWidth = width - margin.left - margin.right;
+        const innerHeight = height - margin.top - margin.bottom;
 
         const barChartSvg = d3.select("div#bar-chart")
             .append("svg")
@@ -85,21 +78,28 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
 
         const xScale = d3.scaleBand()
             .domain(["F", "M"])
-            .range([0, width - margin.left - margin.right])
-            .paddingInner(0.2);
+            .range([0, innerWidth])
+            .paddingInner(0.1);
 
         const yScale = d3.scaleLinear()
-            .domain([0, d3.max([+selectedData.F, +selectedData.M])])
-            .range([height - margin.top - margin.bottom, 0]);
+            .domain([0, 0.1])
+            .range([innerHeight, 0]);
+
+        const xAxis = d3.axisBottom()
+                      .scale(xScale);
+
+        const yAxis = d3.axisLeft()
+                      .scale(yScale).ticks(5).tickFormat(d3.format("0.3f"));
+
 
         barChartSvg.selectAll("rect")
             .data(["F", "M"])
             .enter().append("rect")
             .attr("class", d => (d === "F" ? "bar-f" : "bar-m"))
-            .attr("x", d => xScale(d))
-            .attr("y", d => yScale(+selectedData[d]))
+            .attr("x", d => xScale(d) + margin.left)
+            .attr("y", d => yScale(+selectedData[d])+margin.top)
             .attr("width", xScale.bandwidth())
-            .attr("height", d => height - margin.top - margin.bottom - yScale(+selectedData[d]));
+            .attr("height", d => innerHeight- yScale(+selectedData[d]));
 
         barChartSvg.selectAll("text.bar-label")
             .data(["F", "M"])
@@ -111,13 +111,13 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
             .text(d => selectedData[d]);
 
         barChartSvg.append("g")
-            .attr("class", "axis")
-            .attr("transform", `translate(0, ${height - margin.bottom})`)
-            .call(d3.axisBottom(xScale));
+            .attr("class", "xAxis")
+            .attr("transform", `translate(${margin.left}, ${height - margin                                                                           .bottom})`)
+            .call(xAxis);
 
         barChartSvg.append("g")
-            .attr("class", "axis")
+            .attr("class", "yAxis")
             .attr("transform", `translate(${margin.left},${margin.top})`)
-            .call(d3.axisLeft(yScale).ticks(5).tickFormat(d3.format(".1f")));
+            .call(yAxis);
     }
 });

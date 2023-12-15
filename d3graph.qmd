@@ -45,8 +45,6 @@
 <input type="radio" name="period" value="AM" checked onchange="updatePeriod('AM')"> AM</label>
 <label class="radio-button"><input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"> PM</label>
 </div>
-
-<div id="clock"></div>
 <label>Probability of a Crime Occurring Based on Gender During That Time</label>
 <div id="bar-chart"></div>
 
