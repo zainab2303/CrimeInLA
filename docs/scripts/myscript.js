@@ -82,7 +82,7 @@ d3.csv("https://raw.githubusercontent.com/zainab2303/CrimeInLA/main/Safety.csv")
             .paddingInner(0.1);
 
         const yScale = d3.scaleLinear()
-            .domain([0, 0.1])
+            .domain([0, 1])
             .range([innerHeight, 0]);
 
         const xAxis = d3.axisBottom()
