@@ -1,10 +1,4 @@
-# 
-
----
-title: "Results"
-format: html
-editor: visual
----
+# Results
 
 ## Terrifying Twenties...
 
@@ -12,13 +6,13 @@ The age of the victim could prove to be useful to understand the psychology of c
 
 ```{r}
 df_plot<-read.csv('/Users/anerimodi/Downloads/cleaned.csv')
-df_plot["age_bin"] = cut(df_plot$Vict.Age, c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100), c('0-5', '6-10', '11-15', '16-20', '21-25','26-30','31-35','36-40','41-45','46-50','51-55','56-60','61-65','66-70','71-75','76-80','81-85','86-90','91-95','96-100'), include.lowest=TRUE)
+df_plot["age_bin"] = cut(df_plot$Vict.Age, c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100), c('0-5', '6-10', '11-15', '16-20', '21-25','26-30','31-35','36-40','41-45','46-50','51-55','56-60','61-65','66-70','71-75','76-80','81-85','86-90','91-95','96-100'), include.lowest=TRUE) #binning the ages into bins
 library(tidyverse)
 ggplot(df_plot, aes(x=Vict.Age)) + 
   geom_histogram(binwidth=5, color="darkblue", fill="cornflowerblue", breaks=c(0,5,10,15,20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100))+
   labs(title="Histogram of Victim Age",x="Victim Age", y = "Count")+
   theme(plot.title = element_text(hjust=0.5))+
-  scale_y_continuous(labels = scales::comma)
+  scale_y_continuous(labels = scales::comma) #so that the y axis has readable y ticks
 ```
 
 From the above plot, we can observe that the maximum number of crimes occur against people in the 25-30 age group, and the least committed against very young children below 10.and elder people over the age of 80. In general, young adults are more susceptible to crime as expected, since they are by themselves most of the time in public spaces or in dangerous situations due to the circumstances of work, etc. The twenties seem to be the target age group for most crimes in LA.
@@ -28,13 +22,13 @@ From the above plot, we can observe that the maximum number of crimes occur agai
 On observation, there are 304 Unique premises where crimes take place in our dataframe such as malls, parking lots, MTA railway lines, etc. We will first limit ourselves to the top 6 most frequent premises, and observe whether they form clusters etc through a Biplot visualization where the continuous features of Victim age, Time of Occurrence, Latitude and Longitude are the axes and the graph is drawn on the decomposed version using PCA.
 
 ```{r}
-df_premise=df_plot[df_plot$Premis.Desc %in% c('SINGLE FAMILY DWELLING', 'STREET', 'MULTI-UNIT DWELLING (APARTMENT, DUPLEX, ETC)','SIDEWALK','VEHICLE, PASSENGER/TRUCK'), ]
+df_premise=df_plot[df_plot$Premis.Desc %in% c('SINGLE FAMILY DWELLING', 'STREET', 'MULTI-UNIT DWELLING (APARTMENT, DUPLEX, ETC)','SIDEWALK','VEHICLE, PASSENGER/TRUCK'), ] #filtering only the top 6 premises
 df_premise$Time.of.Occurrence <- as.numeric(substr(df_premise$Time.of.Occurrence, 1, 2)) * 100 +
-                          as.numeric(substr(df_premise$Time.of.Occurrence, 4, 5))
+                          as.numeric(substr(df_premise$Time.of.Occurrence, 4, 5)) #so that we can work with a continuous variable, since right now it is categorical
 library(redav)
 df_premise<-df_premise %>%
   group_by(Premis.Desc) %>%
-  summarise(Time.of.Occurrence = mean(Time.of.Occurrence), Vict.Age = mean(Vict.Age),LAT=mean(LAT), LON=mean(LON))
+  summarise(Time.of.Occurrence = mean(Time.of.Occurrence), Vict.Age = mean(Vict.Age),LAT=mean(LAT), LON=mean(LON)) #for ease of biplot plotting, we compute the mean of each feature
 ```
 
 ```{r}
@@ -42,7 +36,7 @@ df_premise<-df_premise %>%
 #| fig-height: 12
 #| out-width: 100%
 df_premise<-subset(df_premise, select=c('Time.of.Occurrence','Vict.Age','Premis.Desc','LON','LAT'))
-draw_biplot(df_premise, arrows=TRUE,"Vict.Age" ) + 
+draw_biplot(df_premise, arrows=TRUE,"Vict.Age" ) +  #the age axis is calibrated
   theme_bw()+
   labs(title="Biplot to visualize Premise details")+
   theme(plot.title = element_text(hjust=0.5))
@@ -59,15 +53,15 @@ df_sand<-df_plot
 df_sand<-df_sand %>%
   group_by(Vict.Descent, Vict.Sex) %>%
   summarise(count=n(),
-            .groups = 'drop')
-df_sand$Vict.Descent=factor(df_sand$Vict.Descent, levels=c('H','W','B','A','O'))
+            .groups = 'drop') #groupby descent and sex, and count the total in each combo
+df_sand$Vict.Descent=factor(df_sand$Vict.Descent, levels=c('H','W','B','A','O')) #reordering the factor levels in decreasing order of freq
 ggplot(df_sand, aes(fill=Vict.Sex, y=count, x=Vict.Descent)) + 
     geom_bar(position="stack", stat="identity")+
   labs(title="Crime count per descent for each sex",x="Victim Descent", y = "Count")+
   theme(plot.title = element_text(hjust=0.5))+
   scale_y_continuous(labels = scales::comma)+
    scale_fill_manual(values=c('cornflowerblue', 'pink'))+
-  scale_x_discrete(labels=c('Hispanic', 'White', 'Black', 'Asian','Other'))
+  scale_x_discrete(labels=c('Hispanic', 'White', 'Black', 'Asian','Other')) #labeling with meaningful names
 ```
 
 Observing the above stacked bar chart, firstly we notice that most crimes occur against victims of Hispanic descent, and the least against Asians. The 'Other' category consists of all the other descents that we grouped during the cleaning stage of our dataset. The proportion of female and males per descent appears to be mostly equal, however there are more crimes that occur against Black females than males, and less to white females than males.
@@ -80,9 +74,9 @@ Observing the column of Weapon.Used.Desc, we notice that there are either entrie
 
 ```{r}
 df_weapon<-df_plot
-df_weapon$weapon_used <- ifelse(df_weapon$Weapon.Used.Cd > 0, "Yes", "No")
+df_weapon$weapon_used <- ifelse(df_weapon$Weapon.Used.Cd > 0, "Yes", "No") #making a new column based on the original one
 
-df_weapon<- subset(df_weapon, Crm.Cd.Desc != "INCEST (SEXUAL ACTS BETWEEN BLOOD RELATIVES)"&Crm.Cd.Desc != "BEASTIALITY, CRIME AGAINST NATURE SEXUAL ASSLT WITH ANIM")
+df_weapon<- subset(df_weapon, Crm.Cd.Desc != "INCEST (SEXUAL ACTS BETWEEN BLOOD RELATIVES)"&Crm.Cd.Desc != "BEASTIALITY, CRIME AGAINST NATURE SEXUAL ASSLT WITH ANIM") #rare instances, we do not consider these entries
 df_weapon$CrimeSexualNature <- ifelse(grepl("sex|rape", df_weapon$Crm.Cd.Desc, ignore.case = TRUE), "Yes", "No")
 library(grid)
 icecreamcolors <- c("#cc9966", "lightgreen")
@@ -98,13 +92,13 @@ From the above mosaic plot, we observe that when the crime is of a sexual nature
 To understand the association of weapon usage with victim age groups and victim sex, we plot a mosaic plot. The ages have been divided into three categories: 'Child' comprising of individuals of age less than or equal to 18 years, 'Young Adult' comprising of individuals of age 19 to 34 years, and 'Old Adult' comprising of ages 35 plus years.
 
 ```{r}
-df_weapon$Victim_Age <- case_when(  df_weapon$Vict.Age <= 18 ~ 'Child',  between(df_weapon$Vict.Age, 19, 34) ~ 'Young Adult', df_weapon$Vict.Age >= 35 ~ 'Old Adult')
+df_weapon$Victim_Age <- case_when(  df_weapon$Vict.Age <= 18 ~ 'Child',  between(df_weapon$Vict.Age, 19, 34) ~ 'Young Adult', df_weapon$Vict.Age >= 35 ~ 'Old Adult') #classifying ages into three categories
 df_weapon <- df_weapon %>% filter(Victim_Age=='Child'| Victim_Age=='Young Adult'|Victim_Age=='Old Adult') 
 df_weapon$Victim_Age=factor(df_weapon$Victim_Age, levels=c('Child','Young Adult','Old Adult'))
 icecreamcolors2 <- c ("#cc9966", "lightgreen")
 vcd::mosaic(weapon_used~ Vict.Sex+Victim_Age , df_weapon,
             direction = c("v","v","h"),
-             highlighting_fill = icecreamcolors2)
+             highlighting_fill = icecreamcolors2) #mosaic plot, wre the weapon used is the dependent variable
 ```
 
 From the above mosaic plot, we observe that crimes against children are where weapons are most used, leading to the consideration that it may be because children usually are defenseless victims and are unaware of their surroundings. For adults, both young and old, crimes occur without a weapon majorly. There are also more female child victims than male, but more male old adult victims than female.
@@ -114,9 +108,9 @@ From the above mosaic plot, we observe that crimes against children are where we
 To study the spatial variation of crime occurrences and try to understand which areas in Los Angeles are most susceptible to crime, we firstly proceed by removing the rows that have 0 as LON or LAT, since that was a preprocessing done by the dataset providers when the longitude and latitude was not identified. After this, we move on to bin the crime instances into 30 hex bins, and observe the spatial distribution of crimes in the form of a heat map.
 
 ```{r}
-df_area <- df_plot %>% filter(LON != 0 | LAT != 0) 
+df_area <- df_plot %>% filter(LON != 0 | LAT != 0)  #excluding these entries
 ggplot() +
-  geom_hex(data=df_area,
+  geom_hex(data=df_area, #hexmap
            mapping = aes(x=LON, y=LAT), bins=30, color="black")+
   scale_fill_fermenter(n.breaks=10,palette = "viridis")+
   theme_void()+
@@ -132,8 +126,9 @@ To investigate this aspect of crime involving fear or shame of a victim in repor
 
 ```{r}
 df_diff<-df_plot
-df_diff$difference<-as.Date(df_diff$Date_Reported)-as.Date(df_diff$Date_Occurred)
+df_diff$difference<-as.Date(df_diff$Date_Reported)-as.Date(df_diff$Date_Occurred) #to get the difference in number of days
 df_diff$difference <- as.numeric(df_diff$difference)
+#categorizing the differences
 df_diff$difference[df_diff$difference==0 ]<-'Instant'
 df_diff$difference[df_diff$difference>0 & df_diff$difference<=365]<-'Within 1 year'
 df_diff$difference[df_diff$difference>=366 & df_diff$difference<=730]<-'Within 2 years'
@@ -158,6 +153,7 @@ ggplot(df_diff, aes(axis1 =Vict.Sex , axis2 = difference, axis3 = Status.Desc, y
   scale_y_continuous(labels = scales::comma)+
   labs(title="Alluvial diagram")+
   theme(plot.title = element_text(hjust=0.5))
+#the alluvial plot wil have the axis as the categorical vars
 ```
 
 From the above alluvial diagram, on observing the flow from victim sex all the way to the end which is the status of the crime, we notice that firstly most of the adult arrests status crimes have resulted when the crime was reported instantly and very few result from those that have been reported 1-2 years after the crime (giving us some idea on the importance of immediate evidence needed in most cases). Mostly all cases reported after a year have their investigation still continuing. Secondly, out of all the Female victims, less than half report instantly, and the rest take more time than that, whereas it is the opposite for male victims where more than half report instantly.
@@ -168,10 +164,10 @@ Taking advantage of the fact that we have a dataset that comprises of crime acro
 
 ```{r}
 df_covid<-df_plot
-df_covid$Year_Occurred<-lubridate::year(df_covid$Date_Occurred)
-df_covid$Month_Occurred<-lubridate::month(df_covid$Date_Occurred)
+df_covid$Year_Occurred<-lubridate::year(df_covid$Date_Occurred) #use lubridate to extract the year from the date class
+df_covid$Month_Occurred<-lubridate::month(df_covid$Date_Occurred)#use lubridate to extract the month from the date class
 df_covid<-df_covid %>%
-  group_by(Year_Occurred,Month_Occurred) %>%
+  group_by(Year_Occurred,Month_Occurred) %>% #groupby the year and month so that the line plot is at same points on months
   summarise(total_per_month=n(),
             .groups = 'drop')
 ```
@@ -193,6 +189,7 @@ We observe that for the first part of 2020, there is crime count of more than 10
 Curious to verify whether most crime instances occur when it is dark outside and at nightfall when the security is at low task force, we plot a histogram of the time of occurrence of crime, binning the time into hours. Hour 1 corresponds to 12:00 am midnight to 1:00 am, and Hour 24 corresponds to 11:00pm to 12:00 am.
 
 ```{r}
+#plotting histogram
 df_night<-df_plot
 df_night$Time.of.Occurrence <- as.numeric(substr(df_night$Time.of.Occurrence, 1, 2)) * 100 +
                           as.numeric(substr(df_night$Time.of.Occurrence, 4, 5))
@@ -211,16 +208,16 @@ As expected, there is a dip in the crime committed during the early hours of the
 df_mta<-df_plot
 df_mta <- df_mta %>%
   filter(sapply(strsplit(as.character(df_mta$Premis.Desc), " "), function(x) x[1] == 'MTA'))
-df_mta <- df_mta %>% filter(Premis.Desc!='MTA BUS'& Premis.Desc!='MTA PROPERTY OR PARKING LOT') 
+df_mta <- df_mta %>% filter(Premis.Desc!='MTA BUS'& Premis.Desc!='MTA PROPERTY OR PARKING LOT') #filtering out the MTA line premises
 
-getFirstFewWords <- function(text, n = 3) {
+getFirstFewWords <- function(text, n = 3) { #to extract the line color from the premis
   words <- strsplit(text, " ")[[1]]
   paste(words[1:n], collapse = " ")
 }
 
 # Apply the function to create a new column
 df_mta <- df_mta %>%
-  mutate(railline = sapply(Premis.Desc, getFirstFewWords))
+  mutate(railline = sapply(Premis.Desc, getFirstFewWords)) #grouping all colors together
 df_mta<-df_mta %>%
   group_by(railline) %>%
   summarise(count=n(),
@@ -230,7 +227,7 @@ df_mta<-df_mta %>%
 On observation of the unique values of crimes occurring on the MTA lines, there are the following color lines: Orange, Purple, Green, Blue, Red, Silver, Expo, Gold and the Bus and Parking Lot. We remove those that occur in the Bus and Parking Lot, since we want to concentrate on the railway line. Also, the MTA bus has the highest cases of crime occurring, and appears to be an outlier when we plot the Cleveland Dot plot, so for better visualization, we focus on the railways.
 
 ```{r}
-custom_colors <- c("MTA - RED" = "red", "MTA - BLUE" = "blue", "MTA - GREEN" = "green", "MTA - GOLD" = "gold","MTA - SILVER" = "grey", "MTA - PURPLE" = "purple", "MTA - ORANGE" = "orange", "MTA - EXPO" = "black")
+custom_colors <- c("MTA - RED" = "red", "MTA - BLUE" = "blue", "MTA - GREEN" = "green", "MTA - GOLD" = "gold","MTA - SILVER" = "grey", "MTA - PURPLE" = "purple", "MTA - ORANGE" = "orange", "MTA - EXPO" = "black") #color coding the lines
 
 ggplot(df_mta, aes(x = count, y = fct_reorder(railline, count))) +
   geom_point(size = 3, color = custom_colors[df_mta$railline]) +
