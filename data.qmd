@@ -191,7 +191,7 @@ Our first plot will showcase the percentage of missing values in each column so 
 ```{r}
 library(tidyverse)
 #Adding NA to blank values
-df[df==""]<-NA
+df[df==""]<-NA 
 missing_percentage <- (colSums(is.na(df)) / nrow(df)) * 100
 
 
