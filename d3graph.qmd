@@ -46,6 +46,7 @@
 <label class="radio-button"><input type="radio" name="period" value="PM" onchange="updatePeriod('PM')"> PM</label>
 </div>
 <label>Probability of crime being committed based on sex during the selected hour: </label>
+<p> legend : F-Female | M-Male</p>
 <div id="bar-chart"></div>
 
 

@@ -5,7 +5,7 @@
 The age of the victim could prove to be useful to understand the psychology of criminals and the high-risk situations that lead to crime against certain individuals. Given in our dataframe is the age as an integer from 0 to 100, and to visualize the distribution of crime occurrence for different age groups, we will plot a histogram, with age bin width of 5 years.
 
 ```{r}
-df_plot<-read.csv('/Users/anerimodi/Downloads/cleaned.csv')
+df_plot<-read.csv('/Users/zainabshakruwala/Downloads/cleaned.csv')
 df_plot["age_bin"] = cut(df_plot$Vict.Age, c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100), c('0-5', '6-10', '11-15', '16-20', '21-25','26-30','31-35','36-40','41-45','46-50','51-55','56-60','61-65','66-70','71-75','76-80','81-85','86-90','91-95','96-100'), include.lowest=TRUE) #binning the ages into bins
 library(tidyverse)
 ggplot(df_plot, aes(x=Vict.Age)) + 
