@@ -7,3 +7,5 @@ We have also made a smaller sized file from the cleaned the dataset 'Safety.csv'
 An additional html file practice.Rhtml can also be found in the same folder that is just for documentation and error checking purposes and can be ignored.
 While running the interactivity part, you will have to change the AM-PM button and then click on the desired clock for it function properly!
 ![Local Image](Images/mosaic.png)
+![Local Image](Images/spatial.png)
+![Local Image](Images/alluvialplot.png)
