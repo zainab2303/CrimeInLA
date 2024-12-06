@@ -27,11 +27,9 @@ From the above alluvial diagram, on observing the flow from victim sex all the w
 
 <a href="https://github.com/zainab2303">
   <img src="https://github.com/zainab2303.png" width="50" height="50" alt="Zainab Shakruwala">
-  <br>
-  Zainab Shakruwala
+  <sub>Zainab Shakruwala</sub>
 </a>
 <a href="https://github.com/abm2211">
   <img src="https://github.com/abm2211.png" width="50" height="50" alt="Aneri Bijal Modi">
-  <br>
-  Aneri Modi
+  <sub>Aneri Modi</sub>
 </a>
