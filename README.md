@@ -30,7 +30,6 @@ From the above alluvial diagram, on observing the flow from victim sex all the w
   <br>
   Zainab Shakruwala
 </a>
-Aneri Bijal Modi
 <a href="https://github.com/abm2211">
   <img src="https://github.com/abm2211.png" width="50" height="50" alt="Aneri Bijal Modi">
   <br>
