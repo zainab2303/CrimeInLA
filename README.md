@@ -1,3 +1,4 @@
+## Analyzing Crime in LA
 We analyzed crime data in Los Angeles using R (ggplot2) and d3.js for interactive visualizations to explore how factors like race, gender, area, and time influence crime trends and victim susceptibility. Our study examined the impact of COVID-19 on crime rates, progression of neighborhood crime over the years, and demographic factors affecting sexual crime susceptibility. We also identified safer neighborhoods based on crime prevalence. Our dataset can be found here: https://data.lacity.org/Public-Safety/Crime-Data-from-2020-to-Present/2nrs-mtv8 
 
 ## Some of our interesting results include:
@@ -23,11 +24,11 @@ From the above alluvial diagram, on observing the flow from victim sex all the w
 - To run the interactive plot please select the AM-PM button and then click on the desired time button to view the risk of crime for each gender!
 
 ## Contributors
-
+Zainab Shakruwala
 <a href="https://github.com/zainab2303">
   <img src="https://github.com/zainab2303.png" width="50" height="50" alt="Zainab Shakruwala">
 </a>
-
+Aneri Bijal Modi
 <a href="https://github.com/abm2211">
   <img src="https://github.com/abm2211.png" width="50" height="50" alt="Aneri Bijal Modi">
 </a>
