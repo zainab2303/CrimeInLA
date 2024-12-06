@@ -6,3 +6,4 @@ That dataset is also to big to uplaod but can be recreated using 'cleaning.qmd'
 We have also made a smaller sized file from the cleaned the dataset 'Safety.csv' the steps to recreate this can be found in 'MakingSafetycsv.qmd' in addition_scripts folder.
 An additional html file practice.Rhtml can also be found in the same folder that is just for documentation and error checking purposes and can be ignored.
 While running the interactivity part, you will have to change the AM-PM button and then click on the desired clock for it function properly!
+![Local Image](Images/mosaic.png)
