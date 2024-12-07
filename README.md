@@ -25,12 +25,16 @@ From the above alluvial diagram, on observing the flow from victim sex all the w
 
 ## Contributors
 <div align="center">
-<a href="https://github.com/zainab2303" style="margin: 10px;">
-  <img src="https://github.com/zainab2303.png" width="50" height="50" alt="Zainab Shakruwala"><br>
+  
+<a href="https://github.com/zainab2303" style="margin: 20px; text-decoration: none;">
+  <img src="https://github.com/zainab2303.png" width="80" height="80" alt="Zainab Shakruwala"><br>
   <sub><b>Zainab Shakruwala</b></sub>
 </a>
-<a href="https://github.com/abm2211" style="margin: 10px;">
-  <img src="https://github.com/abm2211.png" width="50" height="50" alt="Aneri Bijal Modi"><br>
+
+<a href="https://github.com/abm2211" style="margin: 20px; text-decoration: none;">
+  <img src="https://github.com/abm2211.png" width="80" height="80" alt="Aneri Bijal Modi"><br>
   <sub><b>Aneri Modi</b></sub>
 </a>
+
 </div>
+
