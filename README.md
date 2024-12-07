@@ -24,7 +24,7 @@ From the above alluvial diagram, on observing the flow from victim sex all the w
 - To run the interactive plot please select the AM-PM button and then click on the desired time button to view the risk of crime for each gender!
 
 ## Contributors
-<div align="center">
+
   
 <a href="https://github.com/zainab2303" style="margin: 20px; text-decoration: none;">
   <img src="https://github.com/zainab2303.png" width="80" height="80" alt="Zainab Shakruwala"><br>
@@ -36,5 +36,5 @@ From the above alluvial diagram, on observing the flow from victim sex all the w
   <sub><b>Aneri Modi</b></sub>
 </a>
 
-</div>
+
 
