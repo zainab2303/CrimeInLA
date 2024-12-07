@@ -27,10 +27,10 @@ From the above alluvial diagram, on observing the flow from victim sex all the w
 <div align="center">
 <a href="https://github.com/zainab2303" style="margin: 10px;">
   <img src="https://github.com/zainab2303.png" width="50" height="50" alt="Zainab Shakruwala">
-  <sub>Zainab Shakruwala</sub>
+  <sub><b>Zainab Shakruwala</b></sub>
 </a>
 <a href="https://github.com/abm2211" style="margin: 10px;">
   <img src="https://github.com/abm2211.png" width="50" height="50" alt="Aneri Bijal Modi">
-  <sub>Aneri Modi</sub>
+  <sub><b>Aneri Modi</b></sub>
 </a>
 </div>
